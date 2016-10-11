@@ -1,0 +1,61 @@
+.container {
+
+}
+
+.list {
+  margin: 0;
+}
+
+.platform {
+  cursor: pointer;
+  position: relative;
+  vertical-align: top;
+  text-align: center;
+  list-style: none;
+  width: 125px;
+  height: 125px;
+  padding: 10px;
+  display: inline-block;
+  margin: 5px;
+  border: 2px solid #333333;
+  background: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  transition: all .3s;
+}
+
+.platform:hover {
+  border-color: #f3610b;
+}
+
+.platform a {
+  margin: 0 auto;
+}
+
+.platformTitle {
+  position: absolute;
+  left:0;
+  bottom: 5px;
+  width: 100%;
+}
+
+.availabilityCheckIcon {
+  position: absolute;
+  top:-5px;
+  right: -5px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  width: 15px;
+  height: 15px;
+  padding:5px;
+}
+
+.available {
+  background-color: green;
+}
+
+.unavailable {
+  background-color: red;
+}

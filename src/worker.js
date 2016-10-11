@@ -21,6 +21,25 @@ export default function buildWorker(app, env) {
     throw new Error('invalid access');
   });
 
+  app.get('/api/check', (req, res) => {
+    const check = {};
+    let count = Object.keys(platforms).length;
+    platforms.map((platform) => {
+      --count;
+      const path = `${retroPieConfig.path}/${platform.path}/`;
+      try {
+        fs.accessSync(path, fs.F_OK);
+        check[platform.name] = true;
+      } catch (e) {
+        check[platform.name] = false;
+      }
+
+      if (count == 0) {
+        res.send(check);
+      }
+    });
+  });
+
   app.use(fileUpload());
 
   app.post('/api/upload', cors(), (req, res, next) => {

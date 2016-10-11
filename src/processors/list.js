@@ -11,6 +11,18 @@ export const list = async (platform) => {
     });
 };
 
+export const check = async () => {
+  return await fetch(`/api/check`)
+    .then((response) => {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+
+      return response.json();
+    });
+};
+
 export default {
-  list
+  list,
+  check,
 };

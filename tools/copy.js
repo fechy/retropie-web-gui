@@ -22,6 +22,7 @@ async function copy({ watch } = {}) {
   await Promise.all([
     ncp('src/public', 'build/public'),
     ncp('src/config', 'build/config'),
+    ncp('src/images', 'build/public/images'),
     ncp('yarn.lock', 'build/yarn.lock'),
   ]);
 

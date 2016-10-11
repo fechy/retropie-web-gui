@@ -74,6 +74,7 @@ const config = {
       },
       {
         test: /\.css/,
+        exclude: /node_modules/,
         loaders: [
           'isomorphic-style-loader',
           `css-loader?${JSON.stringify({

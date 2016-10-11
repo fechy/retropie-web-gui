@@ -11,28 +11,14 @@ import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link/Link';
+import Platforms from '../../components/Platforms';
 import s from './Home.css';
-
-import platformsConfig from '../../config/platforms.json';
 
 function Home() {
   return (
     <Layout>
       <div className={s.container}>
-        <ul>
-          {
-            platformsConfig.map((platform) => {
-              return (
-                <li key={`platform-thumb-${platform.name}`}>
-                  <Link to={`/platform/${platform.name}`}>
-                    <img src={platform.image} alt={platform.title}/>
-                    <p>{platform.title}</p>
-                  </Link>
-                </li>
-              );
-            })
-          }
-        </ul>
+        <Platforms />
       </div>
     </Layout>
   );
