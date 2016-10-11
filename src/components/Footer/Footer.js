@@ -16,7 +16,9 @@ function Footer() {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <span className={s.text}>© Retropie</span>
+        <span className={s.text}>©</span>
+        <span className={s.spacer} />
+        <Link to="https://retropie.org.uk/">Retropie</Link>
       </div>
     </div>
   );

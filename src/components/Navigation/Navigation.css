@@ -8,7 +8,7 @@
  */
 
 .root {
-  margin: 0;
+  margin: 0 auto;
 }
 
 .link {
@@ -16,12 +16,14 @@
   padding: 3px 8px;
   text-decoration: none;
   font-size: 1.125em; /* ~18px */
+  color: #FFF;
 }
 
 .link,
 .link:active,
 .link:visited {
-  color: rgba(255, 255, 255, 0.6);
+  padding: 15px 20px;
+  background-color: #333333;
 }
 
 .link:hover {

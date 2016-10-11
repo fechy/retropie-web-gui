@@ -22,6 +22,7 @@ async function copy({ watch } = {}) {
   await Promise.all([
     ncp('src/public', 'build/public'),
     ncp('src/config', 'build/config'),
+    ncp('yarn.lock', 'build/yarn.lock'),
   ]);
 
   await fs.writeFile('./build/package.json', JSON.stringify({

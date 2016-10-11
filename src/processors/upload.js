@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-export default function upload(config, filesData, callback) {
+export const upload = async (config, filesData) => {
   const headers = new Headers();
 
   const formData  = new FormData();
@@ -11,16 +11,20 @@ export default function upload(config, filesData, callback) {
     formData.append(`files[${i}]`, file, file.name);
   });
 
-  fetch(`/api/upload`, {
+  return await fetch(`/api/upload`, {
     method: 'POST',
     mode: 'cors',
     body: formData,
     headers: headers
-  }).then((response) => {
+  }).then(function(response) {
     if (response.status >= 400) {
       throw new Error("Bad response from server");
     }
 
     return response.json();
-  }).then(callback);
+  });
+};
+
+export default {
+  upload
 }

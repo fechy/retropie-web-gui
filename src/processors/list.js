@@ -1,11 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
-export default function list(platform, callback) {
-  fetch(`/api/list/${platform}`).then((response) => {
-    if (response.status >= 400) {
-      throw new Error("Bad response from server");
-    }
+export const list = async (platform) => {
+  return await fetch(`/api/list/${platform}`)
+    .then((response) => {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
 
-    return response.json();
-  }).then(callback);
-}
+      return response.json();
+    });
+};
+
+export default {
+  list
+};

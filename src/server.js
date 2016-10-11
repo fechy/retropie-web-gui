@@ -27,6 +27,8 @@ import { port } from './config';
 
 const app = express();
 
+const DEBUG = !process.argv.includes('--release');
+
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
 // user agent is not known.
@@ -42,7 +44,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-buildWorker(app);
+buildWorker(app, DEBUG ? '.dev' : '');
 
 //
 // Register server-side rendering middleware

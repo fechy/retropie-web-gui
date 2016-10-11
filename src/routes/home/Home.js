@@ -7,20 +7,32 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
-import Platforms from '../../components/Platforms';
+import Link from '../../components/Link/Link';
 import s from './Home.css';
+
+import platformsConfig from '../../config/platforms.json';
 
 function Home() {
   return (
     <Layout>
       <div className={s.container}>
-        <h1>RetroPie Web Admin</h1>
-        <div>
-          <Platforms />
-        </div>
+        <ul>
+          {
+            platformsConfig.map((platform) => {
+              return (
+                <li key={`platform-thumb-${platform.name}`}>
+                  <Link to={`/platform/${platform.name}`}>
+                    <img src={platform.image} alt={platform.title}/>
+                    <p>{platform.title}</p>
+                  </Link>
+                </li>
+              );
+            })
+          }
+        </ul>
       </div>
     </Layout>
   );

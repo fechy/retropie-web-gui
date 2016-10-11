@@ -148,6 +148,7 @@ fabric.properties
 
 .idea/
 build/
+tmp/
 # *.iml
 # modules.xml
 # .idea/misc.xml

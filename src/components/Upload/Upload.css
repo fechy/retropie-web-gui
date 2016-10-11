@@ -1,0 +1,44 @@
+.inline {
+  display: inline-block;
+  width: 49%;
+  vertical-align: top;
+}
+
+.centered {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.container {
+
+}
+
+.form {
+
+}
+
+.fileInfo {
+  float: right;
+  clear: both;
+}
+
+.dropzone {
+  border: 1px dashed #000;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px 5px 5px 5px;
+  -webkit-transition: background .5s;
+  -moz-transition: background .5s;
+  -ms-transition: background .5s;
+  -o-transition: background .5s;
+  transition: background .5s;
+}
+
+/** Sadly dropzone doest play very well with unknown file types, so active and reject are the same**/
+.dropzoneActive {
+  background-color: #b3d4fc;
+}
+
+.dropzoneReject {
+  background-color: #b3d4fc;
+}

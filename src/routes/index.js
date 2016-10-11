@@ -14,11 +14,10 @@ export default {
 
   path: '/',
 
-  exclude: '/api',
-
   // Keep in mind, routes are evaluated in order
   children: [
     require('./home').default,
+    require('./platform').default,
     require('./notFound').default,
   ],
 

@@ -14,13 +14,16 @@
 }
 
 .root {
-  background: #373277;
+  background: #fff;
   color: #fff;
 }
 
 .container {
+  padding: 0;
+}
+
+.innerContainer {
   margin: 0 auto;
-  padding: 20px 0;
   max-width: var(--max-content-width);
 }
 
@@ -30,13 +33,20 @@
   font-size: 1.75em; /* ~28px */
 }
 
+.brand span {
+  float: right;
+}
+
 .brandTxt {
   margin-left: 10px;
 }
 
 .nav {
-  float: right;
-  margin-top: 6px;
+  background: #000;
+}
+
+.navigation {
+  max-width: var(--max-content-width);
 }
 
 .banner {

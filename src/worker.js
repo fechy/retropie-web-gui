@@ -3,7 +3,11 @@ import cors from 'cors';
 import fs from 'fs';
 import _ from 'lodash';
 
-export default function buildWorker(app) {
+export default function buildWorker(app, env) {
+
+  const retroPieConfig = require(`./config/retropie${env}.json`);
+  const platforms = require(`./config/platforms.json`);
+
   // Add headers
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -30,7 +34,7 @@ export default function buildWorker(app) {
 
     let remaining = Object.keys(files).length;
     _.forEach(files, (file) => {
-      file.mv(`${platform.path}${file.name}`, (err) => {
+      file.mv(`${retroPieConfig.path}/${platform.path}/${file.name}`, (err) => {
         --remaining;
         if (remaining === 0 || err) {
           const result = {
@@ -50,9 +54,19 @@ export default function buildWorker(app) {
 
   app.get('/api/list/:platform', (req, res) => {
     const { platform } = req.params;
+    const index = _.findIndex(platforms, (plt) => {
+      return plt.name == platform;
+    });
+    if (index == -1) {
+      res.status(404).send({ error: 'wrong platform name' });
+      return;
+    }
+
+    const platformConfig = platforms[index];
+
     res.send({
       platform,
-      list: fs.readdirSync(`roms/${platform}/`),
+      list: fs.readdirSync(`${retroPieConfig.path}/${platformConfig.path}/`),
     });
   });
 }
