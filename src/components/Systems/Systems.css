@@ -6,7 +6,7 @@
   margin: 0;
 }
 
-.platform {
+.system {
   cursor: pointer;
   position: relative;
   vertical-align: top;
@@ -25,15 +25,15 @@
   transition: all .3s;
 }
 
-.platform:hover {
+.system:hover {
   border-color: #f3610b;
 }
 
-.platform a {
+.system a {
   margin: 0 auto;
 }
 
-.platformTitle {
+.systemTitle {
   position: absolute;
   left:0;
   bottom: 5px;

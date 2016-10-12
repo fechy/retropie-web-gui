@@ -7,7 +7,7 @@ export function upload(config, filesData) {
 
   const formData  = new FormData();
 
-  formData.append('platform', JSON.stringify(config));
+  formData.append('system', JSON.stringify(config));
 
   filesData.forEach((file, i)=> {
     formData.append(`files[${i}]`, file, file.name);

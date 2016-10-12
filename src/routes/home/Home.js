@@ -12,18 +12,18 @@ import { connect } from 'react-redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link/Link';
-import Platforms from '../../components/Platforms';
+import Systems from '../../components/Systems';
 import * as actions from '../../actions/check';
 import s from './Home.css';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     isChecking: state.check.get('isChecking'),
     checkList: state.check.get('list'),
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onLoad: () => dispatch(actions.check()),
   }
@@ -41,7 +41,7 @@ class Home extends Component
     return (
       <Layout>
         <div className={s.container}>
-          <Platforms isChecking={isChecking} checkList={checkList} />
+          <Systems isChecking={isChecking} checkList={checkList} />
         </div>
       </Layout>
     )

@@ -56,7 +56,7 @@ class Upload extends Component
 
     const { onUploadDone , upload } = this.props;
 
-    upload(this.props.platform, this.state.files).then(onUploadDone);
+    upload(this.props.system, this.state.files).then(onUploadDone);
   }
 
   render() {
@@ -66,7 +66,7 @@ class Upload extends Component
       )
     }
 
-    const { platform, error } = this.props;
+    const { system, error } = this.props;
 
     return (
       <div className={s.container} >
@@ -76,7 +76,7 @@ class Upload extends Component
                     activeClassName={s.dropzoneActive}
                     rejectClassName={s.dropzoneReject}
                     onDrop={this.onDrop}
-                    accept={platform.extensions.join(',')}
+                    accept={system.extensions.join(',')}
                     disablePreview={true}
           >
             <div>Try dropping some files here, or click to select files to upload.</div>

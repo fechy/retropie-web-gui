@@ -6,22 +6,22 @@ import history from '../../core/history';
 import Link from '../../components/Link/Link';
 import Image from '../../components/Image';
 
-import s from './Platforms.css';
+import s from './systems.css';
 
-import configs from '../../config/platforms.json';
+import configs from '../../config/systems.json';
 
-const Platform = ({name, title, image, available, onClick}) => {
+const System = ({name, title, image, available, onClick}) => {
   const classNames = classnames(s.availabilityCheckIcon, "fa", available ? 'fa-check' : 'fa-close', available ? s.available : s.unavailable);
   return (
-    <div key={`platform-${name}`} className={s.platform} key={`platform-thumb-${name}`} onClick={() => onClick(`/platform/${name}`)}>
+    <div key={`system-${name}`} className={s.system} onClick={() => onClick(`/system/${name}`)}>
         <Image src={image} alt={title} />
-        <div className={s.platformTitle}>{title}</div>
+        <div className={s.systemTitle}>{title}</div>
         <i className={classNames} />
     </div>
   )
 };
 
-class Platforms extends Component
+class Systems extends Component
 {
   constructor(...props) {
     super(...props);
@@ -33,7 +33,7 @@ class Platforms extends Component
     history.push(url);
   }
 
-  renderPlatforms() {
+  renderSystems() {
     const { isChecking, checkList } = this.props;
 
     if (isChecking || checkList == undefined) {
@@ -43,10 +43,10 @@ class Platforms extends Component
     return (
       <div className={s.list}>
         {
-          configs.map((platform) => {
-            const isAvailable = checkList[platform.name];
+          configs.map((system) => {
+            const isAvailable = checkList[system.name];
             return (
-              <Platform key={`emu-${platform.name}`} {...platform}
+              <System key={`emu-${system.name}`} {...system}
                 available={isAvailable}
                 onClick={this.onHandleClick}
               />
@@ -60,11 +60,11 @@ class Platforms extends Component
   render() {
     return (
       <div className={s.container}>
-        <h1>Emulators</h1>
-        {this.renderPlatforms()}
+        <h1>Systems</h1>
+        {this.renderSystems()}
       </div>
     )
   }
 }
 
-export default withStyles(s)(Platforms);
+export default withStyles(s)(Systems);

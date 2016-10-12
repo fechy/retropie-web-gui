@@ -6,7 +6,7 @@ import _ from 'lodash';
 export default function buildWorker(app, env) {
 
   const retroPieConfig = require(`./config/retropie${env}.json`);
-  const platforms = require(`./config/platforms.json`);
+  const systems = require(`./config/systems.json`);
 
   // Add headers
   app.use((req, res, next) => {
@@ -23,15 +23,15 @@ export default function buildWorker(app, env) {
 
   app.get('/api/check', (req, res) => {
     const check = {};
-    let count = Object.keys(platforms).length;
-    platforms.map((platform) => {
+    let count = Object.keys(systems).length;
+    systems.map((system) => {
       --count;
-      const path = `${retroPieConfig.path}/${platform.path}/`;
+      const path = `${retroPieConfig.path}/${system.path}/`;
       try {
         fs.accessSync(path, fs.F_OK);
-        check[platform.name] = true;
+        check[system.name] = true;
       } catch (e) {
-        check[platform.name] = false;
+        check[system.name] = false;
       }
 
       if (count == 0) {
@@ -48,12 +48,12 @@ export default function buildWorker(app, env) {
       return;
     }
 
-    const platform = JSON.parse(req.body.platform);
+    const system = JSON.parse(req.body.system);
     const files = req.files;
 
     let remaining = Object.keys(files).length;
     _.forEach(files, (file) => {
-      file.mv(`${retroPieConfig.path}/${platform.path}/${file.name}`, (err) => {
+      file.mv(`${retroPieConfig.path}/${system.path}/${file.name}`, (err) => {
         --remaining;
         if (remaining === 0 || err) {
           const result = {
@@ -71,29 +71,29 @@ export default function buildWorker(app, env) {
     });
   });
 
-  app.get('/api/list/:platform', (req, res) => {
-    const { platform } = req.params;
-    const index = _.findIndex(platforms, (plt) => {
-      return plt.name == platform;
+  app.get('/api/list/:system', (req, res) => {
+    const { system } = req.params;
+    const index = _.findIndex(systems, (plt) => {
+      return plt.name == system;
     });
     if (index == -1) {
-      res.status(404).send({ error: 'wrong platform name' });
+      res.status(404).send({ error: 'wrong system name' });
       return;
     }
 
-    const platformConfig = platforms[index];
+    const systemConfig = systems[index];
 
     try {
-      const fileList = fs.readdirSync(`${retroPieConfig.path}/${platformConfig.path}/`)
+      const fileList = fs.readdirSync(`${retroPieConfig.path}/${systemConfig.path}/`)
 
       res.send({
-        platform,
+        system,
         list: fileList,
       });
     } catch (e) {
       res.status(404)
          .send({
-           platform,
+           system,
            error: e.message
          })
     }

@@ -8,13 +8,13 @@
  */
 
 import React from 'react';
-import Platform from './Platform';
+import System from './System';
 
-export const path = '/platform/:id';
+export const path = '/system/:id';
 
 export const action = async ({ params }) => {
   return {
-    component: <Platform { ...params } />,
+    component: <System { ...params } />,
   };
 };
 

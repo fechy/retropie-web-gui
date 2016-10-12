@@ -6,9 +6,9 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import * as actions from '../../actions/list';
 
-import platforms from '../../config/platforms.json';
+import systems from '../../config/systems.json';
 
-import s from './platform.css';
+import s from './system.css';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -19,33 +19,33 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    fetchList: platform => dispatch(actions.list(platform)),
+    fetchList: system => dispatch(actions.list(system)),
   }
 };
 
-class Platform extends Component {
+class Systems extends Component {
   constructor(...props) {
     super(...props);
 
-    const found = platforms.filter((plt) => {
-      return plt.name == this.props.id;
+    const found = systems.filter((sys) => {
+      return sys.name == this.props.id;
     });
 
     this.state = {
-      platform: found[0],
+      system: found[0],
     };
 
     this.onUploadDone = ::this.onUploadDone;
   }
 
   componentDidMount() {
-    this.props.fetchList(this.state.platform.name);
+    this.props.fetchList(this.state.system.name);
   }
 
   onUploadDone() {
-    this.props.fetchList(this.state.platform.name);
+    this.props.fetchList(this.state.system.name);
   }
 
   renderContent() {
@@ -60,17 +60,17 @@ class Platform extends Component {
 
     return (
       <div className={s.container}>
-        <h1>{this.state.platform.title}</h1>
-        <div><img src={this.state.platform.image} /></div>
+        <h1>{this.state.system.title}</h1>
+        <div><img src={this.state.system.image} /></div>
         <div>{listError}</div>
         <div className={s.column}>
           <h4>Files ({fileList.length}):</h4>
           <ul>
-            {fileList.map(file => <li key={`platform-file-${file}`}>{file}</li>)}
+            {fileList.map(file => <li key={`system-file-${file}`}>{file}</li>)}
           </ul>
         </div>
         <div className={s.column}>
-          <Upload platform={this.state.platform} onUploadDone={this.onUploadDone}/>
+          <Upload system={this.state.system} onUploadDone={this.onUploadDone}/>
         </div>
       </div>
     )
@@ -90,4 +90,4 @@ class Platform extends Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(s)(Platform));
+)(withStyles(s)(Systems));

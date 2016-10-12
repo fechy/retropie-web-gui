@@ -17,7 +17,7 @@ export default {
   // Keep in mind, routes are evaluated in order
   children: [
     require('./home').default,
-    require('./platform').default,
+    require('./system').default,
     require('./notFound').default,
   ],
 
