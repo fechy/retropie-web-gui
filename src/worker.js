@@ -58,7 +58,7 @@ export default function buildWorker(app, env) {
         if (remaining === 0 || err) {
           const result = {
             result: err === null,
-            error: err,
+            error: err ? err.message : null,
           };
 
           if (err) {
@@ -83,9 +83,19 @@ export default function buildWorker(app, env) {
 
     const platformConfig = platforms[index];
 
-    res.send({
-      platform,
-      list: fs.readdirSync(`${retroPieConfig.path}/${platformConfig.path}/`),
-    });
+    try {
+      const fileList = fs.readdirSync(`${retroPieConfig.path}/${platformConfig.path}/`)
+
+      res.send({
+        platform,
+        list: fileList,
+      });
+    } catch (e) {
+      res.status(404)
+         .send({
+           platform,
+           error: e.message
+         })
+    }
   });
 }

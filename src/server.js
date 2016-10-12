@@ -22,6 +22,8 @@ import { ErrorPageWithoutStyle } from './routes/error/ErrorPage';
 import errorPageStyle from './routes/error/ErrorPage.css';
 import routes from './routes';
 import assets from './assets'; // eslint-disable-line import/no-unresolved
+import { Provider } from 'react-redux'
+import configureStore from './store/configureStore';
 import buildWorker from './worker';
 import { port } from './config';
 
@@ -51,6 +53,10 @@ buildWorker(app, DEBUG ? '.dev' : '');
 // -----------------------------------------------------------------------------
 app.get('*', async (req, res, next) => {
   try {
+    const store = configureStore({}, {
+      cookie: req.headers.cookie,
+    });
+
     const css = new Set();
 
     // Global (context) variables that can be easily accessed from any React component
@@ -62,6 +68,7 @@ app.get('*', async (req, res, next) => {
         // eslint-disable-next-line no-underscore-dangle
         styles.forEach(style => css.add(style._getCss()));
       },
+      store,
     };
 
     const route = await UniversalRouter.resolve(routes, {
@@ -75,9 +82,10 @@ app.get('*', async (req, res, next) => {
     }
 
     const data = { ...route };
-    data.children = ReactDOM.renderToString(<App context={context}>{route.component}</App>);
+    data.children = ReactDOM.renderToString(<Provider store={store}><App context={context}>{route.component}</App></Provider>);
     data.style = [...css].join('');
     data.script = assets.main.js;
+    data.state = context.store.getState();
     const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
 
     res.status(route.status || 200);

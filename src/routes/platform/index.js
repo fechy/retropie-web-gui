@@ -8,18 +8,15 @@
  */
 
 import React from 'react';
-import fetch from '../../core/fetch';
 import Platform from './Platform';
 
+export const path = '/platform/:id';
+
 export const action = async ({ params }) => {
-  const resp = await fetch(`/api/list/${params.id}`);
-  const data = await resp.json();
   return {
-    component: <Platform { ...params } list={data.list} />,
+    component: <Platform { ...params } />,
   };
 };
-
-export const path = '/platform/:id';
 
 export default {
   path,

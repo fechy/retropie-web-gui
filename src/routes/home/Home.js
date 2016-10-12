@@ -8,20 +8,47 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link/Link';
 import Platforms from '../../components/Platforms';
+import * as actions from '../../actions/check';
 import s from './Home.css';
 
-function Home() {
-  return (
-    <Layout>
-      <div className={s.container}>
-        <Platforms />
-      </div>
-    </Layout>
-  );
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isChecking: state.check.get('isChecking'),
+    checkList: state.check.get('list'),
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onLoad: () => dispatch(actions.check()),
+  }
+};
+
+class Home extends Component
+{
+  componentDidMount() {
+    this.props.onLoad();
+  }
+
+  render() {
+    const { isChecking, checkList } = this.props;
+
+    return (
+      <Layout>
+        <div className={s.container}>
+          <Platforms isChecking={isChecking} checkList={checkList} />
+        </div>
+      </Layout>
+    )
+  }
 }
 
-export default withStyles(s)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(s)(Home));

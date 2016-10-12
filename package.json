@@ -34,7 +34,13 @@
     "react-dom": "15.3.2",
     "react-dropzone": "^3.6.0",
     "react-fetch": "0.0.9",
+    "react-redux": "^4.4.5",
     "react-tap-event-plugin": "^1.0.0",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.0",
+    "redux-promise": "^0.5.3",
+    "redux-promise-middleware": "^4.1.0",
+    "redux-thunk": "^2.1.0",
     "source-map-support": "^0.4.3",
     "universal-router": "1.2.2",
     "whatwg-fetch": "1.0.0"

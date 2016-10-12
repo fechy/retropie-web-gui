@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -7,10 +8,25 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Dropzone from 'react-dropzone';
 
-import {upload} from '../../processors/upload';
+import * as actions from '../../actions/upload';
 import list from '../../processors/list';
 
 import s from './Upload.css';
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isUploading: state.upload.get('isUploading'),
+    error: state.upload.get('error')
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    upload: (config, files) => {
+      return dispatch(actions.upload(config, files))
+    },
+  }
+};
 
 class Upload extends Component
 {
@@ -39,33 +55,24 @@ class Upload extends Component
       return;
     }
 
-    const { onUploadDone } = this.props;
+    const { onUploadDone , upload } = this.props;
 
-    this.setState({ isUploading: true });
-
-    upload(this.props.platform, this.state.files)
-    .then((result) => {
-      if (result.error !== null) {
-        alert(result.error);
-        return;
-      }
-
-      this.setState({ isUploading: false, files: [] }, onUploadDone);
-    });
+    upload(this.props.platform, this.state.files).then(onUploadDone);
   }
 
   render() {
-    if (this.state.isUploading) {
+    if (this.props.isUploading) {
       return (
         <LinearProgress />
       )
     }
 
-    const { platform, } = this.props;
+    const { platform, error } = this.props;
 
     return (
       <div className={s.container} >
         <div>
+          <div>{error}</div>
           <Dropzone className={s.dropzone}
                     activeClassName={s.dropzoneActive}
                     rejectClassName={s.dropzoneReject}
@@ -87,4 +94,7 @@ class Upload extends Component
   }
 }
 
-export default withStyles(s)(Upload);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(s)(Upload));
