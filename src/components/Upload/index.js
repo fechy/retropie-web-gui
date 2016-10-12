@@ -9,18 +9,17 @@ import MenuItem from 'material-ui/MenuItem';
 import Dropzone from 'react-dropzone';
 
 import * as actions from '../../actions/upload';
-import list from '../../processors/list';
 
 import s from './Upload.css';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     isUploading: state.upload.get('isUploading'),
     error: state.upload.get('error')
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     upload: (config, files) => {
       return dispatch(actions.upload(config, files))
