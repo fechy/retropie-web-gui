@@ -5,7 +5,7 @@ import Upload from '../../components/Upload';
 import Image from '../../components/Image';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-import { Grid, Row, Col, ListGroup, ListGroupItem, Media, Badge, Alert } from 'react-bootstrap';
+import { Grid, Row, Col, ListGroup, ListGroupItem, Media, Badge, Alert, Button, Table } from 'react-bootstrap';
 import { AutoAffix } from 'react-overlays';
 
 import * as actions from '../../actions/list';
@@ -18,6 +18,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     isUploading: state.upload.get('isUploading'),
     isFetching: state.list.get('isFetching'),
+    isDeleting: state.list.get('isDeleting'),
     systemAvailable: state.list.get('available'),
     listError: state.list.get('error'),
     fileList: state.list.get('list'),
@@ -27,6 +28,12 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchList: system => dispatch(actions.list(system)),
+    deleteFile: (system, file) => {
+      if (confirm('Are you sure you want to delete this file?')) {
+        dispatch(actions.deleteFile(system, file))
+          .then(() => dispatch(actions.list(system)));
+      }
+    }
   }
 };
 
@@ -40,9 +47,12 @@ class Systems extends Component {
 
     this.state = {
       system: found[0],
+      filter: null
     };
 
     this.onUploadDone = ::this.onUploadDone;
+    this.filterByName = ::this.filterByName;
+    this.onFilterChange = ::this.onFilterChange;
   }
 
   componentDidMount() {
@@ -51,6 +61,23 @@ class Systems extends Component {
 
   onUploadDone() {
     this.props.fetchList(this.state.system.name);
+  }
+
+  onFilterChange(e) {
+    this.setState({
+      filter: e.target.value,
+    });
+  }
+
+  filterByName(filename) {
+    if (!this.state.filter) {
+      return filename;
+    }
+
+    var filterBy = this.state.filter.toLowerCase();
+    if (filename.toLowerCase().indexOf(filterBy) !== -1) {
+      return filename;
+    }
   }
 
   renderListError() {
@@ -66,28 +93,52 @@ class Systems extends Component {
   }
 
   renderFileList() {
-    const { isFetching, fileList } = this.props;
+    const { isFetching, isDeleting, fileList } = this.props;
 
     const list = [];
-    if (isFetching) {
-      list.push(<ListGroupItem bsStyle="success" key={`loading`}>Loading..</ListGroupItem>)
+    if (isFetching || isDeleting) {
+      list.push(<tr key={`system-file-loading`}><td colSpan="3">Processing...</td></tr>)
     } else if (!fileList.length) {
-      list.push(<ListGroupItem bsStyle="danger" key={`loading`}>Empty directory</ListGroupItem>)
+      list.push(<tr key={`system-file-empty`}><td colSpan="3">Empty directory</td></tr>)
     } else {
-      fileList.map(file => {
+      fileList.filter(this.filterByName).map(file => {
         list.push(
-          <ListGroupItem key={`system-file-${file}`}>{file}</ListGroupItem>
+          <tr key={`system-file-${file}`}>
+            <td />
+            <td>{file}</td>
+            <td>
+              <Button bsStyle="danger" bsSize="xs" onClick={this.props.deleteFile.bind(this, this.state.system.name, file)}>
+                <i className="fa fa-close" />
+              </Button>
+            </td>
+          </tr>
         )
       });
     }
 
     return (
-      <ListGroup>
-        <ListGroupItem bsStyle="info">
-          Files in directory <Badge>{fileList.length}</Badge>
-        </ListGroupItem>
-        {list}
-      </ListGroup>
+      <Table striped bordered condensed hover>
+        <thead>
+          <tr>
+            <th />
+            <th colSpan="2">Files in directory <Badge>{fileList.length}</Badge></th>
+          </tr>
+          <tr>
+            <th />
+            <th >
+              <input className={s.filterInput}
+                     value={this.state.filter || ''}
+                     onChange={this.onFilterChange}
+                     placeholder="type to filter by file name"
+              />
+            </th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {list}
+        </tbody>
+      </Table>
     )
   }
 

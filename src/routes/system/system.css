@@ -20,3 +20,16 @@
 .heading h4 {
   font-size: 22px;
 }
+
+.fileAction {
+  position: absolute;
+  top: 20%;
+  right: 10px;
+}
+
+.filterInput {
+  padding: 5px;
+  width: 100%;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}

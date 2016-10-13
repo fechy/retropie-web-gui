@@ -18,11 +18,12 @@
  * ========================================================================== */
 
 html {
-  color: #222;
-  font-weight: 100;
+  font-weight: normal;
   font-size: 1em; /* ~16px; */
   font-family: var(--font-family-base);
   line-height: 1.375; /* ~22px */
+  -webkit-font-smoothing: antialiased;
+  color: #000;
 }
 
 a {
@@ -178,4 +179,9 @@ textarea {
   h3 {
     page-break-after: avoid;
   }
+}
+
+input:hover, input:focus,
+button:hover, button:focus {
+  outline: none;
 }
