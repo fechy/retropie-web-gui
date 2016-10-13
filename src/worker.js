@@ -76,26 +76,42 @@ export default function buildWorker(app, env) {
     const index = _.findIndex(systems, (plt) => {
       return plt.name == system;
     });
-    if (index == -1) {
-      res.status(404).send({ error: 'wrong system name' });
-      return;
+
+    let error = null;
+    let exception = null;
+    let available = false;
+    let fileList = [];
+
+    if (index > -1) {
+      const systemConfig = systems[index];
+      const path = `${retroPieConfig.path}/${systemConfig.path}/`;
+      try {
+        try {
+          fs.accessSync(path, fs.F_OK);
+          available = true;
+        } catch (e) {
+          error = e.message;
+        }
+
+        if (available) {
+          fileList = fs.readdirSync(path);
+        }
+      } catch (e) {
+        error = e.message;
+      }
+    } else {
+      error = 'Unknown system name';
     }
 
-    const systemConfig = systems[index];
-
-    try {
-      const fileList = fs.readdirSync(`${retroPieConfig.path}/${systemConfig.path}/`)
-
-      res.send({
-        system,
-        list: fileList,
-      });
-    } catch (e) {
+    if (error) {
       res.status(404)
-         .send({
-           system,
-           error: e.message
-         })
     }
+
+    res.send({
+      system,
+      available,
+      error,
+      fileList,
+    });
   });
 }

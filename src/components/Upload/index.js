@@ -8,6 +8,8 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Dropzone from 'react-dropzone';
 
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+
 import * as actions from '../../actions/upload';
 
 import s from './Upload.css';
@@ -59,6 +61,17 @@ class Upload extends Component
     upload(this.props.system, this.state.files).then(onUploadDone);
   }
 
+  renderQueue() {
+    if (this.state.files.length > 0) {
+      return (
+        <ListGroup>
+          <ListGroupItem bsStyle="info">Files to upload</ListGroupItem>
+          {this.state.files.map(file => <ListGroupItem key={`upload-file-${file.name}`}>{file.name}</ListGroupItem>)}
+        </ListGroup>
+      );
+    }
+  }
+
   render() {
     if (this.props.isUploading) {
       return (
@@ -66,27 +79,30 @@ class Upload extends Component
       )
     }
 
-    const { system, error } = this.props;
+    const { system, error, enabled } = this.props;
 
     return (
       <div className={s.container} >
         <div>
           <div>{error}</div>
-          <Dropzone className={s.dropzone}
+          <Dropzone className={classnames(s.dropzone, !enabled ? s.disabled : '')}
                     activeClassName={s.dropzoneActive}
                     rejectClassName={s.dropzoneReject}
-                    onDrop={this.onDrop}
+                    onDrop={enabled ? this.onDrop : null}
                     accept={system.extensions.join(',')}
                     disablePreview={true}
+                    inputProps={{ disabled: !enabled }}
           >
-            <div>Try dropping some files here, or click to select files to upload.</div>
+            <div>
+              <p>Try dropping some files here, or click to select files to upload.</p>
+              <p>The allowed extensions are: {system.extensions.join(',')}</p>
+            </div>
           </Dropzone>
-          <ul>
-            {this.state.files.map( file => <li key={`upload-file-${file.name}`}>{file.name}</li> )}
-          </ul>
+          <br />
+          {this.renderQueue()}
         </div>
         <div className={s.centered}>
-          <button onClick={this.handleOnUpload}>Upload</button>
+          <Button bsStyle="danger" disabled={!enabled} onClick={this.handleOnUpload}>Upload</Button>
         </div>
       </div>
     )

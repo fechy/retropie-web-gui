@@ -243,7 +243,7 @@
     "name": "oric",
     "title": "Oric",
     "description": "Oric",
-    "image": "images/oric.png",
+    "image": "",
     "path": "roms/oric",
     "extensions": [".dsk", ".tap"]
   },
@@ -323,7 +323,7 @@
     "name": "ti99",
     "title": "TI-99/4A",
     "description": "TI-99/4A",
-    "image": "images/ti99.png",
+    "image": "",
     "path": "roms/ti99",
     "extensions": [".ctg"]
   },
@@ -331,7 +331,7 @@
     "name": "trs-80",
     "title": "TRS-80",
     "description": "TRS-80",
-    "image": "images/trs-80.png",
+    "image": "",
     "path": "roms/trs-80",
     "extensions": [".dsk"]
   },

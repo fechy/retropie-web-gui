@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Layout from '../../components/Layout';
 import Upload from '../../components/Upload';
+import Image from '../../components/Image';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+
+import { Grid, Row, Col, ListGroup, ListGroupItem, Media, Badge, Alert } from 'react-bootstrap';
+import { AutoAffix } from 'react-overlays';
 
 import * as actions from '../../actions/list';
 
@@ -14,6 +18,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     isUploading: state.upload.get('isUploading'),
     isFetching: state.list.get('isFetching'),
+    systemAvailable: state.list.get('available'),
     listError: state.list.get('error'),
     fileList: state.list.get('list'),
   }
@@ -48,39 +53,90 @@ class Systems extends Component {
     this.props.fetchList(this.state.system.name);
   }
 
-  renderContent() {
-    const { isFetching, fileList, listError } = this.props;
-    if (isFetching || !fileList) {
+  renderListError() {
+    const { listError } = this.props;
+    if (listError) {
       return (
-        <div className={s.container}>
-          fetching list...
-        </div>
-      )
+        <Alert bsStyle="danger">
+          <h4>Oh snap! You got an error!</h4>
+          <p>{listError}</p>
+        </Alert>
+      );
+    }
+  }
+
+  renderFileList() {
+    const { isFetching, fileList } = this.props;
+
+    const list = [];
+    if (isFetching) {
+      list.push(<ListGroupItem bsStyle="success" key={`loading`}>Loading..</ListGroupItem>)
+    } else if (!fileList.length) {
+      list.push(<ListGroupItem bsStyle="danger" key={`loading`}>Empty directory</ListGroupItem>)
+    } else {
+      fileList.map(file => {
+        list.push(
+          <ListGroupItem key={`system-file-${file}`}>{file}</ListGroupItem>
+        )
+      });
     }
 
     return (
-      <div className={s.container}>
-        <h1>{this.state.system.title}</h1>
-        <div><img src={this.state.system.image} /></div>
-        <div>{listError}</div>
-        <div className={s.column}>
-          <h4>Files ({fileList.length}):</h4>
-          <ul>
-            {fileList.map(file => <li key={`system-file-${file}`}>{file}</li>)}
-          </ul>
-        </div>
-        <div className={s.column}>
-          <Upload system={this.state.system} onUploadDone={this.onUploadDone}/>
-        </div>
-      </div>
+      <ListGroup>
+        <ListGroupItem bsStyle="info">
+          Files in directory <Badge>{fileList.length}</Badge>
+        </ListGroupItem>
+        {list}
+      </ListGroup>
+    )
+  }
+
+  renderContent() {
+    const { systemAvailable } = this.props;
+    return (
+      <Grid>
+        <Row>
+          <Col xs={12} md={8}>
+            {this.renderListError()}
+            {this.renderFileList()}
+          </Col>
+          <Col xs={6} md={4}>
+            <AutoAffix viewportOffsetTop={15} container={this}>
+              <div>
+                <Upload system={this.state.system}
+                        enabled={systemAvailable}
+                        onUploadDone={this.onUploadDone}
+                />
+              </div>
+            </AutoAffix>
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 
   render() {
+    const { system } = this.state;
+
+    const imageSrc = system && system.image ? `/${system.image}` : null;
+
     return (
       <Layout>
         <div className={s.root}>
-          {this.renderContent()}
+          <div className={s.container}>
+            <div className={s.heading}>
+              <Media>
+                <Media.Left align="middle">
+                  <Image width={64} height={64} src={imageSrc} alt="Image"/>
+                </Media.Left>
+                <Media.Body>
+                  <Media.Heading>{this.state.system.title}</Media.Heading>
+                  <p>{this.state.system.description}</p>
+                </Media.Body>
+              </Media>
+            </div>
+            {this.renderContent()}
+          </div>
         </div>
       </Layout>
     );

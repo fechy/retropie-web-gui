@@ -34,6 +34,10 @@
   transition: background .5s;
 }
 
+.disabled {
+  opacity: .5;
+}
+
 /** Sadly dropzone doest play very well with unknown file types, so active and reject are the same**/
 .dropzoneActive {
   background-color: #b3d4fc;

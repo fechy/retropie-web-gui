@@ -1,5 +1,8 @@
-.container {
+@import '../../components/variables.css';
 
+.container {
+  margin: 0 auto;
+  max-width: var(--max-content-width);
 }
 
 .list {
@@ -12,8 +15,8 @@
   vertical-align: top;
   text-align: center;
   list-style: none;
-  width: 125px;
-  height: 125px;
+  width: 150px;
+  height: 150px;
   padding: 10px;
   display: inline-block;
   margin: 5px;
@@ -33,6 +36,10 @@
   margin: 0 auto;
 }
 
+.system.hidden {
+  display: none;
+}
+
 .systemTitle {
   position: absolute;
   left:0;
@@ -47,8 +54,8 @@
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   padding:5px;
 }
 
