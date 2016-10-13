@@ -16,7 +16,7 @@ export default {
 
   async action() {
     return {
-      title: 'Retropie Web',
+      title: 'Home',
       component: <Home />,
     };
   }

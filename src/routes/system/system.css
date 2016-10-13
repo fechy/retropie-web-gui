@@ -33,3 +33,8 @@
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
 }
+
+.tableHeader th {
+  border: none;
+  background-color: #DDDDDD;
+}

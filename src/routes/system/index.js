@@ -8,12 +8,23 @@
  */
 
 import React from 'react';
+import NotFound from '../notFound/NotFound';
 import System from './System';
+import { findSystemById } from '../../helpers';
 
 export const path = '/system/:id';
 
 export const action = async ({ params }) => {
+  const system = findSystemById(params.id);
+  if (!system) {
+    return {
+      title: 'Unknown',
+      component: <NotFound title={'Ups... nothing to show!'} { ...params } />,
+    };
+  }
+
   return {
+    title: system.title,
     component: <System { ...params } />,
   };
 };

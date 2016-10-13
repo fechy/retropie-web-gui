@@ -8,13 +8,12 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { Grid, Row, Col, ListGroup, ListGroupItem, Media, Badge, Alert, Button, Table } from 'react-bootstrap';
 import { AutoAffix } from 'react-overlays';
 
+import { systems, findSystemById } from '../../helpers';
 import * as actions from '../../actions/list';
-
-import systems from '../../config/systems.json';
 
 import s from './system.css';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     isUploading: state.upload.get('isUploading'),
     isFetching: state.list.get('isFetching'),
@@ -41,12 +40,8 @@ class Systems extends Component {
   constructor(...props) {
     super(...props);
 
-    const found = systems.filter((sys) => {
-      return sys.name == this.props.id;
-    });
-
     this.state = {
-      system: found[0],
+      system: findSystemById(this.props.id),
       filter: null
     };
 
@@ -119,9 +114,8 @@ class Systems extends Component {
     return (
       <Table striped bordered condensed hover>
         <thead>
-          <tr>
-            <th />
-            <th colSpan="2">Files in directory <Badge>{fileList.length}</Badge></th>
+          <tr className={s.tableHeader}>
+            <th colSpan="3">Files in directory <Badge>{fileList.length}</Badge></th>
           </tr>
           <tr>
             <th />
@@ -168,6 +162,9 @@ class Systems extends Component {
 
   render() {
     const { system } = this.state;
+    if (!system) {
+      return (<div>Ups</div>);
+    }
 
     const imageSrc = system && system.image ? `/${system.image}` : null;
 
@@ -176,15 +173,17 @@ class Systems extends Component {
         <div className={s.root}>
           <div className={s.container}>
             <div className={s.heading}>
-              <Media>
-                <Media.Left align="middle">
-                  <Image width={64} height={64} src={imageSrc} alt="Image"/>
-                </Media.Left>
-                <Media.Body>
-                  <Media.Heading>{this.state.system.title}</Media.Heading>
-                  <p>{this.state.system.description}</p>
-                </Media.Body>
-              </Media>
+              {this.state.system ?
+                <Media>
+                  <Media.Left align="middle">
+                    <Image width={64} height={64} src={imageSrc} alt="Image"/>
+                  </Media.Left>
+                  <Media.Body>
+                    <Media.Heading>{this.state.system.title}</Media.Heading>
+                    <p>{this.state.system.description}</p>
+                  </Media.Body>
+                </Media>
+              : null}
             </div>
             {this.renderContent()}
           </div>

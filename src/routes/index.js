@@ -31,7 +31,7 @@ export default {
     } while (!route);
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} - RetroPie`;
+    route.title = `RetroPie - ${route.title || 'Untitled Page'}`;
     route.description = route.description || '';
 
     return route;
