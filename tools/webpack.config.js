@@ -74,7 +74,7 @@ const config = {
       },
       {
         test: /\.css/,
-        exclude: /node_modules/,
+        exclude: [ /node_modules/, path.resolve(__dirname, '../src/public') ],
         loaders: [
           'isomorphic-style-loader',
           `css-loader?${JSON.stringify({
@@ -87,6 +87,11 @@ const config = {
           })}`,
           'postcss-loader?pack=default',
         ],
+      },
+      {
+        test: /\.css$/,
+        include: path.resolve(__dirname, '../src/public'),
+        loader: 'style!css'
       },
       {
         test: /\.scss$/,

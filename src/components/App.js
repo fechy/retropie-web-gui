@@ -45,7 +45,6 @@ class App extends React.Component {
       </MuiThemeProvider>
     );
   }
-
 }
 
 export default App;

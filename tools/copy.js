@@ -34,20 +34,6 @@ async function copy({ watch } = {}) {
       start: 'node server.js',
     },
   }, null, 2));
-
-  if (watch) {
-    const watcher = await new Promise((resolve, reject) => {
-      gaze('src/content/**/*.*', (err, val) => (err ? reject(err) : resolve(val)));
-    });
-
-    const cp = async (file) => {
-      const relPath = file.substr(path.join(__dirname, '../src/content/').length);
-      await ncp(`src/content/${relPath}`, `build/content/${relPath}`);
-    };
-
-    watcher.on('changed', cp);
-    watcher.on('added', cp);
-  }
 }
 
 export default copy;

@@ -18,10 +18,10 @@ function Html({ title, description, style, script, children }) {
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-        <link href="font-awesome.min.css" media="all" rel="stylesheet" />
-        <link href="bootstrap.min.css" media="all" rel="stylesheet" />
-        <link href="bootstrap-theme.min.css" media="all" rel="stylesheet" />
+        <link href='/vendors.css' media="all" rel="stylesheet" />
         {style && <style id="css" dangerouslySetInnerHTML={{ __html: style }} />}
       </head>
       <body>
