@@ -33,7 +33,7 @@ npm install -g yarn
 ````
 
 ## Installing and running
-Now you need the serve, so:
+Now you need the server, so:
 - Download the release and unzip it inside `/home/pi/web/retropie-webui`
 - Navigate to `/home/pi/web/retropie-webui/config/` and open `retropie.json`. This file contains the path to retropie directory. If you have the original installation of RetroPie and you haven't modify the path, then you should be already set.
 - Then from the `/home/pi/web/retropie-webui/` directory run one of this commands:
@@ -53,9 +53,14 @@ http://192.168.1.100:3000
 
 If you see the GUI then you are set.
 
+## Whats missing (for now)
+* [ ] Set to run the server automatically on start
+* [ ] Support file renaming
+* [ ] Support for manage splash screens
+
 ## Donating
 This is a "only to help and learn" project. If you wan't to support the project, consider donating to RetroPie (https://retropie.org.uk/donate/)
 
 ## Open Source
-**React**: This project was build all using ReactJS framework.
-**React Starter Kit:** This project has created using Kriasoft's React Starter Kit (https://github.com/kriasoft/react-starter-kit) as a base.
+* **React**: This project was build all using ReactJS framework.
+* **React Starter Kit:** This project has created using Kriasoft's React Starter Kit (https://github.com/kriasoft/react-starter-kit) as a base.
