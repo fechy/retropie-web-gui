@@ -5,7 +5,7 @@ import Upload from '../../components/Upload';
 import Image from '../../components/Image';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-import { Grid, Row, Col, ListGroup, ListGroupItem, Media, Badge, Alert, Button, Table } from 'react-bootstrap';
+import { Grid, Row, Col, ListGroup, ListGroupItem, Media, Badge, Alert, Button, Table, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { AutoAffix } from 'react-overlays';
 
 import { systems, findSystemById } from '../../helpers';
@@ -108,14 +108,20 @@ class Systems extends Component {
       list.push(<tr key={`system-file-empty`}><td colSpan="3">Empty directory</td></tr>)
     } else {
       fileList.filter(this.filterByName).map(file => {
+        const tooltip = (
+          <Tooltip id="tooltip">Delete this file</Tooltip>
+        );
+
         list.push(
           <tr key={`system-file-${file}`} className={this.props.invalidFiles.indexOf(file) > -1 ? s.invalidFile : ''}>
             <td />
             <td>{file}</td>
             <td>
-              <Button bsStyle="danger" bsSize="xs" onClick={this.props.deleteFile.bind(this, this.state.system.name, file)}>
-                <i className="fa fa-close" />
-              </Button>
+              <OverlayTrigger placement="left" overlay={tooltip}>
+                <Button bsStyle="danger" bsSize="xs" onClick={this.props.deleteFile.bind(this, this.state.system.name, file)}>
+                  <i className="fa fa-close" />
+                </Button>
+              </OverlayTrigger>
             </td>
           </tr>
         )
