@@ -24,7 +24,8 @@
 
 .dropzone {
   border: 1px dashed #000;
-  padding: 10px;
+  padding: 80px 10px;
+  font-size: 18px;
   text-align: center;
   border-radius: 5px 5px 5px 5px;
   -webkit-transition: background .5s;

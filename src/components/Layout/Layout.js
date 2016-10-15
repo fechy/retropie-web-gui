@@ -15,7 +15,7 @@ import Footer from '../Footer';
 
 function Layout({ children }) {
   return (
-    <div>
+    <div className={s.wrapper}>
       <Header />
       {React.Children.only(children)}
       <Footer />
