@@ -3,6 +3,8 @@ import * as actions from '../constants';
 
 const InitialState = Record({
   isChecking: true,
+  isCheckingInvalids: false,
+  invalidFiles: [],
   list: [],
 });
 
@@ -23,6 +25,16 @@ export default function check(state = initialState, action) {
     {
       return state.set('isChecking', false)
                   .set('list', action.payload);
+    }
+
+    case actions.CHECK_INVALID_FILES_LOADING: {
+      return state.set('invalidFiles', [])
+        .set('isCheckingInvalids', true);
+    }
+
+    case actions.CHECK_INVALID_FILES_SUCCESS: {
+      return state.set('invalidFiles', action.payload)
+        .set('isCheckingInvalids', false);
     }
   }
 

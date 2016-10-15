@@ -94,8 +94,8 @@ class Upload extends Component
                     inputProps={{ disabled: !enabled }}
           >
             <div>
-              <p>Try dropping some files here, or click to select files to upload.</p>
-              <p>The allowed extensions are: {system.extensions.join(',')}</p>
+              <p>Drop files here, or click to select files to upload.</p>
+              <p>The allowed extensions are: { system.extensions.join(',') }</p>
             </div>
           </Dropzone>
           <br />

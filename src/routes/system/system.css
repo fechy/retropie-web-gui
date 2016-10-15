@@ -38,3 +38,7 @@
   border: none;
   background-color: #DDDDDD;
 }
+
+.invalidFile td {
+  background-color: #FF6666;
+}

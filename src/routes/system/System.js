@@ -10,6 +10,7 @@ import { AutoAffix } from 'react-overlays';
 
 import { systems, findSystemById } from '../../helpers';
 import * as actions from '../../actions/list';
+import * as checkActions from '../../actions/check';
 
 import s from './system.css';
 
@@ -18,6 +19,8 @@ const mapStateToProps = (state) => {
     isUploading: state.upload.get('isUploading'),
     isFetching: state.list.get('isFetching'),
     isDeleting: state.list.get('isDeleting'),
+    isCheckingInvalids: state.check.get('isCheckingInvalids'),
+    invalidFiles: state.check.get('invalidFiles'),
     systemAvailable: state.list.get('available'),
     listError: state.list.get('error'),
     fileList: state.list.get('list'),
@@ -26,12 +29,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchList: system => dispatch(actions.list(system)),
+    fetchList: system => {
+      return dispatch(actions.list(system));
+    },
     deleteFile: (system, file) => {
       if (confirm('Are you sure you want to delete this file?')) {
         dispatch(actions.deleteFile(system, file))
           .then(() => dispatch(actions.list(system)));
       }
+    },
+    checkInvalidFiles: (fileList, systemExtensions) => {
+      return dispatch(checkActions.checkInvalidFiles(fileList, systemExtensions));
     }
   }
 };
@@ -51,7 +59,8 @@ class Systems extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchList(this.state.system.name);
+    this.props.fetchList(this.state.system.name)
+              .then(() => this.props.checkInvalidFiles(this.props.fileList, this.state.system.extensions));
   }
 
   onUploadDone() {
@@ -88,17 +97,19 @@ class Systems extends Component {
   }
 
   renderFileList() {
-    const { isFetching, isDeleting, fileList } = this.props;
+    const { isFetching, isDeleting, fileList, isCheckingInvalids } = this.props;
 
     const list = [];
     if (isFetching || isDeleting) {
       list.push(<tr key={`system-file-loading`}><td colSpan="3">Processing...</td></tr>)
+    } else if (isCheckingInvalids) {
+      list.push(<tr key={`system-file-empty`}><td colSpan="3">Checking for invalid files...</td></tr>)
     } else if (!fileList.length) {
       list.push(<tr key={`system-file-empty`}><td colSpan="3">Empty directory</td></tr>)
     } else {
       fileList.filter(this.filterByName).map(file => {
         list.push(
-          <tr key={`system-file-${file}`}>
+          <tr key={`system-file-${file}`} className={this.props.invalidFiles.indexOf(file) > -1 ? s.invalidFile : ''}>
             <td />
             <td>{file}</td>
             <td>
