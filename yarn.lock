@@ -1848,6 +1848,10 @@ d@1:
   dependencies:
     es5-ext "^0.10.9"
 
+daemonize2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/daemonize2/-/daemonize2-0.4.2.tgz#c6e474078becfa7d7a814002514c4712f64fe06f"
+
 damerau-levenshtein@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/damerau-levenshtein/-/damerau-levenshtein-1.0.3.tgz#ae4f4ce0b62acae10ff63a01bb08f652f5213af2"

@@ -8,8 +8,27 @@ Therefore this project!
 This project is set to provide a web interface where the user can manage the systems files, add and remove, and perform
 simple task like checking for duplicates or invalid files.
 
+## Getting the server
+SSH into the Pi (https://www.raspberrypi.org/documentation/remote-access/ssh/)
+On the root directory and as use PI (If not sure run `whoami`, it should output `pi`) run the following command:
+````
+wget -qO- https://raw.githubusercontent.com/fechy/retropie-web-gui/master/tools/install.sh | bash
+````
+This will run all necessary tasks to set up the server. Follow the output for important messages.
+Once its finished, it will output the URL you have to visit to have access to the server, it should be of the fashion:
+````
+http://192.168.0.100:3000
+````
+The URL is basically the IP address of the PI and the port 3000 where Node is publishing the server.
+
+## Working with and from the code
+In the case that you want to collaborate or simply work in the project from the code, follow these instructions:
+~~~~
+NOTE: Experience in NodeJS, ReactJS and ES6 is needed
+~~~~
+
 ## Setting up the environment
-Since this is a node application, we are going to need to install nodejs in our Raspberry Pi.
+Since this is a node application, we are going to need to install Nodejs in our Raspberry Pi.
 To do so, follow this simple steps:
 ````
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
@@ -54,9 +73,12 @@ http://192.168.1.100:3000
 If you see the GUI then you are set.
 
 ## Whats missing (for now)
-* [ ] Set to run the server automatically on start
+* [x] Set to run the server automatically on start
 * [ ] Support file renaming
 * [ ] Support for manage splash screens
+* [ ] Support for sub directories
+* [ ] Support for Systems with multiple directories (Like Mame)
+* [ ] Support for moving/copying files
 
 ## Donating
 This is a "only to help and learn" project. If you wan't to support the project, consider donating to RetroPie (https://retropie.org.uk/donate/)
