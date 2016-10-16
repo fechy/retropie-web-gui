@@ -112,7 +112,7 @@
     "extensions": [".cdi", ".gdi"]
   },
   {
-    "name": "Genesis/Megadrive",
+    "name": "genesis",
     "title": "Genesis/Megadrive",
     "description": "Genesis/Megadrive",
     "image": "images/genesis.png",
@@ -144,7 +144,7 @@
     "extensions": [".gbc"]
   },
   {
-    "name": "Game Boy Advance",
+    "name": "gba",
     "title": "Game Boy Advance",
     "description": "Game Boy Advance",
     "image": "images/gameboyadvance.png",
@@ -152,7 +152,7 @@
     "extensions": [".gba"]
   },
   {
-    "name": "Intellivision",
+    "name": "intellivision",
     "title": "Intellivision",
     "description": "Intellivision",
     "image": "images/intellivision.png",
@@ -160,7 +160,7 @@
     "extensions": [".int", ".bin"]
   },
   {
-    "name": "Macintosh",
+    "name": "macintosh",
     "title": "Macintosh",
     "description": "Macintosh",
     "image": "images/macintosh.png",
