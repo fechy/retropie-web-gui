@@ -9,8 +9,8 @@ This project is set to provide a web interface where the user can manage the sys
 simple task like checking for duplicates or invalid files.
 
 ## Getting the server
-SSH into the Pi (https://www.raspberrypi.org/documentation/remote-access/ssh/)
-On the root directory and as use PI (If not sure run `whoami`, it should output `pi`) run the following command:
+SSH into the Pi (https://www.raspberrypi.org/documentation/remote-access/ssh/).
+On the root directory and as user `pi` (If not sure run `whoami`, it should output `pi`) run the following command:
 ````
 wget -qO- https://raw.githubusercontent.com/fechy/retropie-web-gui/master/tools/install.sh | bash
 ````
