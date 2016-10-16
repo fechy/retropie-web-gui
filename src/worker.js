@@ -3,6 +3,9 @@ import cors from 'cors';
 import fs from 'fs';
 import _ from 'lodash';
 
+import { cpuAverage } from './helpers/cpu';
+import memory from './helpers/memory';
+
 export default function buildWorker(app, env) {
 
   const retroPieConfig = require(`./config/retropie${env}.json`);
@@ -149,6 +152,21 @@ export default function buildWorker(app, env) {
     res.send({
       result,
       error,
+    });
+  });
+
+  app.get('/api/stats', (req, res) => {
+    const disk = require('diskusage');
+    disk.check('/', function(err, info) {
+      const availablePercentage = ((info.available / info.total) * 100).toFixed(2);
+      res.send({
+        disk:{
+          availablePercentage,
+          ...info
+        },
+        cpu: cpuAverage(),
+        memory: memory(),
+      });
     });
   })
 }

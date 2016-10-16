@@ -18,6 +18,7 @@ export default {
   children: [
     require('./home').default,
     require('./system').default,
+    require('./dashboard').default,
     require('./notFound').default,
   ],
 

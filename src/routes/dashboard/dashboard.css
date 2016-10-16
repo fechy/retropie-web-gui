@@ -1,0 +1,25 @@
+@import '../../components/variables.css';
+
+.root {
+  margin: 0 auto;
+  max-width: var(--max-content-width);
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.chartSection {
+  display: inline-block;
+  width:45%;
+  padding:10px;
+  vertical-align: top;
+}
+
+.chartSection .label {
+  font-size: 18px;
+}
+
+.chartSection .label i {
+  margin-right:10px;
+}

@@ -139,6 +139,12 @@ array-index@^1.0.0:
     debug "^2.2.0"
     es6-symbol "^3.0.2"
 
+array-index@~0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/array-index/-/array-index-0.1.1.tgz#4d5eaf06cc3d925847cd73d1535c217ba306d3e1"
+  dependencies:
+    debug "*"
+
 array-union@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"
@@ -1129,6 +1135,10 @@ binary-extensions@^1.0.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.7.0.tgz#6c1610db163abfb34edfe42fa423343a1e01185d"
 
+bindings@~1.2.0, bindings@1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
+
 bl@^1.0.0, bl@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/bl/-/bl-1.1.2.tgz#fdca871a99713aa00d19e3bbba41c44787a65398"
@@ -1547,6 +1557,10 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
+complex.js@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.0.1.tgz#ea90c7a05aeceaf3a376d2c0f6a78421727d6879"
+
 component-bind@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/component-bind/-/component-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
@@ -1870,7 +1884,7 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@^2.1.1, debug@^2.2.0, debug@~2.2.0, debug@2.2.0:
+debug@*, debug@^2.1.1, debug@^2.2.0, debug@~2.2.0, debug@2, debug@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
@@ -1883,6 +1897,10 @@ debug@~0.7.4, debug@0.7.4:
 decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
+
+decimal.js@5.0.8:
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-5.0.8.tgz#b48c3fb7d73a2d4d4940e0b38f1cd21db5b367ce"
 
 deep-diff@0.3.4:
   version "0.3.4"
@@ -1969,6 +1987,15 @@ dicer@0.2.5:
 diff@1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-1.4.0.tgz#7f28d2eb9ee7b15a97efd89ce63dcfdaa3ccbabf"
+
+diskusage:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/diskusage/-/diskusage-0.1.5.tgz#7644b9dd3acd9837eb1838b635d14ce05b3d9227"
+  dependencies:
+    ffi "^2.0.0"
+    ref "^1.1.1"
+    ref-array "~1.1.1"
+    ref-struct "~1.0.1"
 
 doctrine@^1.2.2:
   version "1.4.0"
@@ -2605,6 +2632,16 @@ fbjs@^0.8.1, fbjs@^0.8.4:
     promise "^7.1.1"
     ua-parser-js "^0.7.9"
 
+ffi@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ffi/-/ffi-2.1.0.tgz#de59b1bf9f27b45bcd3ce5ac356a28cc5bb604c8"
+  dependencies:
+    bindings "~1.2.0"
+    debug "2"
+    nan "2"
+    ref "1"
+    ref-struct "1"
+
 figures@^1.3.5:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-1.7.0.tgz#cbe1e3affcf1cd44b80cadfed28dc793a9701d2e"
@@ -2762,6 +2799,10 @@ formidable@1.0.x:
 forwarded@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.0.tgz#19ef9874c4ae1c297bcf078fde63a09b66a84363"
+
+fraction.js@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-3.3.1.tgz#5d6a31ff07707294f204ccbb6b53791607771083"
 
 fresh@^0.3.0, fresh@0.3.0:
   version "0.3.0"
@@ -4137,6 +4178,16 @@ math-expression-evaluator@^1.2.14:
   dependencies:
     lodash.indexof "^4.0.5"
 
+mathjs:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-3.5.3.tgz#feee89b871bdbc3acb2ecfbcfcc3e97a522c095b"
+  dependencies:
+    complex.js "2.0.1"
+    decimal.js "5.0.8"
+    fraction.js "3.3.1"
+    tiny-emitter "1.0.2"
+    typed-function "0.10.4"
+
 mdurl@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
@@ -4290,7 +4341,7 @@ mute-stream@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.5.tgz#8fbfabb0a98a253d3184331f9e8deb7372fac6c0"
 
-nan@^2.3.0, nan@^2.3.2:
+nan@^2.3.0, nan@^2.3.2, nan@2:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.4.0.tgz#fb3c59d45fe4effe215f0b890f8adf6eb32d2232"
 
@@ -5199,6 +5250,10 @@ pretty-error@2.0.1:
     renderkid "~2.0.0"
     utila "~0.4"
 
+prettysize:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/prettysize/-/prettysize-0.0.3.tgz#14afff6a645e591a4ddf1c72919c23b4146181a1"
+
 private@^0.1.6, private@~0.1.5:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.6.tgz#55c6a976d0f9bafb9924851350fe47b9b5fbb7c1"
@@ -5418,6 +5473,10 @@ react-redux:
     lodash "^4.2.0"
     loose-envify "^1.1.0"
 
+react-simple-pie-chart:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-simple-pie-chart/-/react-simple-pie-chart-0.4.0.tgz#f9a56a330d05bb9f9abea670abde804da4f1e861"
+
 react-tap-event-plugin@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-1.0.0.tgz#7a248505a9e9abecc352b2dab313d17685c51adf"
@@ -5609,6 +5668,36 @@ redux-promise-middleware:
 redux-thunk:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.1.0.tgz#c724bfee75dbe352da2e3ba9bc14302badd89a98"
+
+ref-array@~1.1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/ref-array/-/ref-array-1.1.2.tgz#38598e3e84e0dfead3a8ec6b5974b0617ec86a35"
+  dependencies:
+    array-index "~0.1.1"
+    debug "2"
+    ref "1"
+
+ref-struct@~1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ref-struct/-/ref-struct-1.0.2.tgz#6e37cafa2db5f5f2ddaf5ae8bafced3e246cbc90"
+  dependencies:
+    debug "2"
+    ref "1"
+
+ref-struct@1:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ref-struct/-/ref-struct-1.1.0.tgz#5d5ee65ad41cefc3a5c5feb40587261e479edc13"
+  dependencies:
+    debug "2"
+    ref "1"
+
+ref@^1.1.1, ref@1:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/ref/-/ref-1.3.2.tgz#f500f22be73fdcd632668e7795309cf088fd06d6"
+  dependencies:
+    bindings "1"
+    debug "2"
+    nan "2"
 
 regenerate@^1.2.1:
   version "1.3.1"
@@ -6440,6 +6529,10 @@ timers-browserify@^1.0.1:
   dependencies:
     process "~0.11.0"
 
+tiny-emitter@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-1.0.2.tgz#8e49470d3f55f89e247210368a6bb9fb51aa1601"
+
 tmpl@1.0.x:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"
@@ -6514,6 +6607,10 @@ type-is@~1.6.13:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.11"
+
+typed-function@0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-0.10.4.tgz#1a015498d38eaf9c402fcce1022a0bd87b7418b2"
 
 typedarray@~0.0.5:
   version "0.0.6"
