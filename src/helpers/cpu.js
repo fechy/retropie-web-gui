@@ -1,6 +1,6 @@
 const os = require('os');
 
-export function cpuAverage() {
+function cpuAverage() {
   let totalIdle = 0;
   let totalTick = 0;
 
@@ -40,17 +40,43 @@ export function cpuAverage() {
   }
 }
 
-export function cpuLoadInit() {
-  const start = cpuAverage();
-  const end = cpuAverage();
-  const diff = {};
+function calculateDiff(start, end) {
+  //Calculate the difference in idle and total time between the measures
+  const idleDifference = end.idle - start.idle;
+  const totalDifference = end.total - start.total;
 
-  diff.idle = end.idle - start.idle;
-  diff.total = end.total - start.total;
+  //Calculate the average percentage CPU usage
+  const percentageCPU = 100 - ~~(100 * idleDifference / totalDifference);
 
-  diff.percent = 1 - diff.idle / diff.total;
-
-  return diff;
+  return {
+    idle: idleDifference,
+    total: totalDifference,
+    percentage: percentageCPU
+  }
 }
 
-export const cpuLoad = cpuLoadInit();
+let startMeasure = cpuAverage();
+
+export default function measureCPUUsage() {
+  return new Promise((resolve) => {
+    // Set delay for second Measure
+    setTimeout(function () {
+
+      // Grab second Measure
+      const endMeasure = cpuAverage();
+
+      const overall = calculateDiff(startMeasure, endMeasure);
+      const all = [];
+
+      startMeasure.all.map((cpu, i) => {
+        all.push(calculateDiff(cpu, endMeasure.all[i]))
+      });
+
+      startMeasure = cpuAverage();
+
+      // Return results
+      resolve({ overall, all });
+
+    }, 100);
+  });
+}

@@ -3,7 +3,7 @@ import cors from 'cors';
 import fs from 'fs';
 import _ from 'lodash';
 
-import { cpuAverage } from './helpers/cpu';
+import measureCPUUsage from './helpers/cpu';
 import memory from './helpers/memory';
 
 export default function buildWorker(app, env) {
@@ -157,16 +157,19 @@ export default function buildWorker(app, env) {
 
   app.get('/api/stats', (req, res) => {
     const disk = require('diskusage');
+
     disk.check('/', function(err, info) {
       const availablePercentage = ((info.available / info.total) * 100).toFixed(2);
-      res.send({
-        disk:{
-          availablePercentage,
-          ...info
-        },
-        cpu: cpuAverage(),
-        memory: memory(),
+      const disk = {
+        availablePercentage,
+        ...info
+      };
+
+      const mem = memory();
+
+      measureCPUUsage().then(cpu => {
+        res.send({ disk, cpu, memory: mem });
       });
     });
-  })
+  });
 }

@@ -81,10 +81,10 @@ class StatsBoard extends Component
           <ListGroup>
             <ListGroupItem className={s.label}>
               <i className="fa fa-cogs" aria-hidden="true" />
-              Overall CPU Usage
+              Overall Average CPU Usage
             </ListGroupItem>
             <ListGroupItem>
-              <ProgressBar percentage={mathjs.round(cpu.get('percentage'), 2)} />
+              <ProgressBar percentage={mathjs.round(cpu.get('overall').percentage, 2)} />
             </ListGroupItem>
           </ListGroup>
           {
@@ -93,7 +93,7 @@ class StatsBoard extends Component
                 <ListGroup key={`stat-cpu-${i}`}>
                   <ListGroupItem className={s.label}>
                     <i className="fa fa-cogs" aria-hidden="true" />
-                    CPU {i} Usage
+                    CPU {i} Average Usage
                   </ListGroupItem>
                   <ListGroupItem>
                     <ProgressBar percentage={mathjs.round(data.percentage, 2)} />
