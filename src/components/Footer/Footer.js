@@ -19,6 +19,10 @@ function Footer() {
         <span className={s.text}>©</span>
         <span className={s.spacer} />
         <Link to="https://retropie.org.uk/">Retropie</Link>
+        <span className={s.spacer}> - </span>
+        <Link to="https://github.com/fechy/retropie-web-gui">
+          <i className="fa fa-github"/>
+        </Link>
       </div>
     </div>
   );

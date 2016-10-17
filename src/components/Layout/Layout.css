@@ -207,3 +207,8 @@ input:hover, input:focus,
 button:hover, button:focus {
   outline: none;
 }
+
+h1 {
+  padding-left: 35px;
+  padding-right: 35px;
+}
