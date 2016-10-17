@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 INSTALL_PATH="/home/pi/web/retropie-web-gui"
+INIT_SCRIPT="retropie-web-gui.sh"
 
 # Checks if we are running this script with the right user
 function is_right_user {
@@ -110,6 +111,7 @@ function run_get_release {
   mv release.zip $INSTALL_PATH/release.zip;
   cd $INSTALL_PATH;
   unzip -o $INSTALL_PATH/release.zip -d $INSTALL_PATH/;
+  rm -f $INSTALL_PATH/release.zip;
 
   if [ $? -ne 0 ];
   then
@@ -134,7 +136,7 @@ function run_prepare_server {
 
 # Start a new retropie-web server
 function run_start_server {
-  pm2 start server.js -f --name="retropie-web" -- --release > /dev/null;
+  sudo pm2 start server.js -f --name="retropie-web" -- --release > /dev/null;
   if [ $? -ne 0 ]
   then
     echo "Something went wrong starting the server. Check the output and try again"
@@ -146,6 +148,16 @@ function run_start_server {
   echo "The server is available at: http://$IP:3000"
 }
 
+# Sets the init script
+function set_init_script() {
+  echo "Copying start up script"
+  curl -LOk https://raw.githubusercontent.com/fechy/retropie-web-gui/development/tools/retropie-web-gui.sh;
+  sudo cp $INIT_SCRIPT /etc/init.d/;
+  sudo chmod +x /etc/init.d/$INIT_SCRIPT;
+  sudo update-rc.d $INIT_SCRIPT defaults;
+  rm -f $INIT_SCRIPT
+}
+
 # Stop any running server
 function stop_running_servers {
   if [ is_pm2_available ];
@@ -154,13 +166,15 @@ function stop_running_servers {
   fi
 }
 
+# Run all tasks
 function run {
   is_right_user;
   stop_running_servers;
   run_prepare_env;
   run_get_release;
   run_prepare_server;
-  run_start_server
+  run_start_server;
+  set_init_script
 }
 
 run;
