@@ -12,43 +12,35 @@ import { connect } from 'react-redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
 import Link from '../../components/Link/Link';
-import Systems from '../../components/Systems';
-import * as actions from '../../actions/check';
+
 import s from './Home.css';
-
-const mapStateToProps = (state) => {
-  return {
-    isChecking: state.check.get('isChecking'),
-    checkList: state.check.get('list'),
-  }
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onLoad: () => dispatch(actions.check()),
-  }
-};
 
 class Home extends Component
 {
-  componentDidMount() {
-    this.props.onLoad();
-  }
-
   render() {
-    const { isChecking, checkList } = this.props;
-
     return (
       <Layout>
-        <div className={s.container}>
-          <Systems isChecking={isChecking} checkList={checkList} />
+        <div className={s.root}>
+          <div className={s.container}>
+            <ul className={s.bigButtons}>
+              <li>
+                <Link to={`/stats`}>
+                  <i className="fa fa-database" />
+                  <p>System Stats</p>
+                </Link>
+              </li>
+              <li>
+                <Link to={`/systems`}>
+                  <i className="fa fa-gamepad" />
+                  <p>Systems</p>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </Layout>
     )
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(s)(Home));
+export default withStyles(s)(Home);

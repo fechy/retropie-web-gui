@@ -1,7 +1,7 @@
 .container {
   height: 30px;
-  border: 2px solid #000;
-  background: green;
+  border: 2px solid #B2BABB;
+  background: #EBF5FB;
   overflow: hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -9,14 +9,25 @@
 }
 
 .bar {
-  background: blue;
+  background: #F5B041;
   padding: 2px 5px;
   height: 100%;
   text-align: right;
   color:#FFF;
   transition: width 0.5s ease-out;
+  font-weight: bold;
 }
 
-.warning {
-  background: red;
+.low {
+  background: #5DADE2;
+  color:#000;
+}
+
+.normal {
+  background: #F5B041;
+  color:#000;
+}
+
+.high {
+  background: #EC7063;
 }

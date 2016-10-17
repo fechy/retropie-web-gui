@@ -9,14 +9,14 @@
 
 import React from 'react';
 import NotFound from '../notFound/NotFound';
-import Dashboard from './Dashboard';
+import Systems from './Systems';
 
-export const path = '/dashboard';
+export const path = '/systems';
 
-export const action = async ({ params }) => {
+export const action = async () => {
   return {
-    title: `Dashboard`,
-    component: <Dashboard { ...params } />,
+    title: `Systems`,
+    component: <Systems />,
   };
 };
 

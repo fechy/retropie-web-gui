@@ -1,0 +1,44 @@
+@import '../../components/variables.css';
+
+.root {
+  margin: 0 auto;
+  max-width: var(--max-content-width);
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.column {
+  vertical-align: top;
+}
+
+.heading {
+  margin: 25px 15px;
+}
+
+.heading h4 {
+  font-size: 22px;
+}
+
+.fileAction {
+  position: absolute;
+  top: 20%;
+  right: 10px;
+}
+
+.filterInput {
+  padding: 5px;
+  width: 100%;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tableHeader th {
+  border: none;
+  background-color: #DDDDDD;
+}
+
+.invalidFile td {
+  background-color: #FF6666;
+}

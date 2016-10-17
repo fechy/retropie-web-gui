@@ -8,7 +8,7 @@ import Image from '../../components/Image';
 import { Grid, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { AutoAffix } from 'react-overlays';
 
-import s from './systems.css';
+import s from './SystemsList.css';
 
 import configs from '../../config/systems.json';
 

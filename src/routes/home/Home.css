@@ -10,6 +10,8 @@
 @import '../../components/variables.css';
 
 .root {
+  width: var(--max-content-width);
+  margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -17,4 +19,31 @@
 .container {
   margin: 0 auto;
   padding: 0 0 40px;
+}
+
+.bigButtons {
+  list-style: none;
+  margin: 0;
+}
+
+.bigButtons li {
+  display: inline-block;
+  border: 2px solid var(--link-color);
+  width: 180px;
+  padding: 5px 10px 0;
+  font-size: 100px;
+  text-align: center;
+  margin: 10px;
+}
+
+.bigButtons li a {
+  vertical-align: top;
+}
+
+.bigButtons li a p {
+  font-size: 14px;
+}
+
+.bigButtons li a:hover {
+  text-decoration: none;
 }

@@ -11,7 +11,7 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar';
 
 import * as statsAction from '../../actions/stats';
 
-import s from './dashboard.css';
+import s from './stats-board.css';
 
 const mapStateToProps = (state) => {
   return {
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-class Dashboard extends Component
+class StatsBoard extends Component
 {
   interval = null;
 
@@ -123,4 +123,4 @@ class Dashboard extends Component
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(s)(Dashboard));
+)(withStyles(s)(StatsBoard));
