@@ -5,7 +5,25 @@ import Upload from '../../components/Upload';
 import Image from '../../components/Image';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-import { Grid, Row, Col, ListGroup, ListGroupItem, Media, Badge, Alert, Button, Table, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import {
+  Grid,
+  Row,
+  Col,
+  ListGroup,
+  ListGroupItem,
+  Media,
+  Badge,
+  Alert,
+  Button,
+  Table,
+  Tooltip,
+  OverlayTrigger
+} from 'react-bootstrap';
+
+import MediaBody from 'react-bootstrap/lib/MediaBody';
+import MediaLeft from 'react-bootstrap/lib/MediaLeft';
+import MediaHeading from 'react-bootstrap/lib/MediaHeading';
+
 import { AutoAffix } from 'react-overlays';
 
 import { systems, findSystemById } from '../../helpers';
@@ -192,13 +210,13 @@ class Systems extends Component {
             <div className={s.heading}>
               {this.state.system ?
                 <Media>
-                  <Media.Left align="middle">
+                  <MediaLeft align="middle">
                     <Image width={64} height={64} src={imageSrc} alt="Image"/>
-                  </Media.Left>
-                  <Media.Body>
-                    <Media.Heading>{this.state.system.title}</Media.Heading>
+                  </MediaLeft>
+                  <MediaBody>
+                    <MediaHeading>{this.state.system.title}</MediaHeading>
                     <p>{this.state.system.description}</p>
-                  </Media.Body>
+                  </MediaBody>
                 </Media>
               : null}
             </div>

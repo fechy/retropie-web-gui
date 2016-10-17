@@ -19,13 +19,13 @@ export const action = async ({ params }) => {
   if (!system) {
     return {
       title: 'Unknown',
-      component: <NotFound title={'Ups... nothing to show!'} { ...params } />,
+      component: (<NotFound title={'Ups... nothing to show!'} { ...params } />),
     };
   }
 
   return {
     title: system.title,
-    component: <System { ...params } />,
+    component: (<System { ...params } />),
   };
 };
 
