@@ -6,9 +6,9 @@ INIT_SCRIPT="retropie-web-gui.sh"
 # Checks if we are running this script with the right user
 function is_right_user {
   USR="$(whoami)";
-  if [ "$USR" != 'pi' ];
+  if [ "$USR" -eq 'root' ];
   then
-    echo "Please run this command from the PI user";
+    echo "Please don't run this command as root";
     exit 0;
   fi
 }
