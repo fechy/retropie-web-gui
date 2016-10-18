@@ -49,6 +49,8 @@
     "redux-promise": "^0.5.3",
     "redux-promise-middleware": "^4.1.0",
     "redux-thunk": "^2.1.0",
+    "socket.io": "^1.5.0",
+    "socket.io-client": "^1.5.0",
     "source-map-support": "^0.4.3",
     "style-loader": "^0.13.1",
     "universal-router": "1.2.2",

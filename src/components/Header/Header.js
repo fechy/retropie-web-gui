@@ -12,6 +12,7 @@ import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import Navigation from '../Navigation';
+import MiniStats from '../MiniStats';
 import logo from './RetroPie_Logo-60x60.png';
 import s from './Header.css';
 
@@ -25,6 +26,7 @@ function Header() {
               <img src={logo} />
             </div>
           </Navigation>
+          <MiniStats />
         </div>
       </div>
     </div>

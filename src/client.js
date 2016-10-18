@@ -149,7 +149,7 @@ async function onLocationChange(location) {
     }
 
     ReactDOM.render(
-      <App context={context}>{route.component}</App>,
+      <App context={context} hostname={window.location.hostname}>{route.component}</App>,
       container,
       () => onRenderComplete(route, location)
     );

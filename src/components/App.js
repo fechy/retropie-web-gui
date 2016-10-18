@@ -12,8 +12,10 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import { port } from '../config';
+import SystemHealth from './SystemHealth';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 const ContextType = {
@@ -30,6 +32,7 @@ class App extends React.Component {
   static propTypes = {
     context: PropTypes.shape(ContextType).isRequired,
     children: PropTypes.element.isRequired,
+    hostname: PropTypes.string.isRequired,
   };
 
   static childContextTypes = ContextType;
@@ -41,7 +44,10 @@ class App extends React.Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-        {React.Children.only(this.props.children)}
+        <div>
+          <SystemHealth port={port} ip={this.props.hostname} />
+          {React.Children.only(this.props.children)}
+        </div>
       </MuiThemeProvider>
     );
   }

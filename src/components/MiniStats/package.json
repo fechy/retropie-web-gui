@@ -1,0 +1,6 @@
+{
+  "name": "MiniStats",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./MiniStats.js"
+}

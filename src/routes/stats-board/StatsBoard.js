@@ -22,30 +22,12 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    checkDiskSpace: () => dispatch(statsAction.diskUsage())
-  }
-};
-
 class StatsBoard extends Component
 {
-  interval = null;
-
   constructor(...props) {
     super(...props);
 
     this.state = {};
-  }
-
-  componentDidMount() {
-    // ...
-    this.props.checkDiskSpace();
-    this.interval = setInterval(this.props.checkDiskSpace, 5000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
 
   _renderContent() {
@@ -120,7 +102,4 @@ class StatsBoard extends Component
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(s)(StatsBoard));
+export default connect(mapStateToProps)(withStyles(s)(StatsBoard));

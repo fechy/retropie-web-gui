@@ -27,9 +27,16 @@ import configureStore from './store/configureStore';
 import buildWorker from './worker';
 import { port } from './config';
 
+const DEBUG = !process.argv.includes('--release');
+
 const app = express();
 
-const DEBUG = !process.argv.includes('--release');
+const http = app.listen(port, () => {
+  // Sockets
+  console.log(`The server is running at http://localhost:${port}/`);
+});
+
+const io = require('socket.io').listen(http);
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -46,7 +53,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-buildWorker(app, DEBUG ? '.dev' : '');
+buildWorker(app, DEBUG ? '.dev' : '', io);
 
 //
 // Register server-side rendering middleware
@@ -115,8 +122,4 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   );
   res.status(err.status || 500);
   res.send(`<!doctype html>${html}`);
-});
-
-app.listen(port, () => {
-  console.log(`The server is running at http://localhost:${port}/`);
 });
