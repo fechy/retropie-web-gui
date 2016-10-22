@@ -23,3 +23,7 @@
 .chartSection .label i {
   margin-right:10px;
 }
+
+.error {
+  color: #FF0000;
+}

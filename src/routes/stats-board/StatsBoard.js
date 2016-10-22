@@ -19,6 +19,7 @@ const mapStateToProps = (state) => {
     disk: state.stats.get('disk'),
     cpu: state.stats.get('cpu'),
     memory: state.stats.get('memory'),
+    temp: state.stats.get('temp'),
   }
 };
 
@@ -31,11 +32,21 @@ class StatsBoard extends Component
   }
 
   _renderContent() {
-    const { disk, cpu, memory } = this.props;
+    const { disk, cpu, memory, temp } = this.props;
 
     return (
       <div>
         <div className={s.chartSection}>
+          <ListGroup>
+            <ListGroupItem className={s.label}>
+              <i className="fa fa-fire" aria-hidden="true" />
+              Temp <Badge>{ mathjs.round(temp.get('temp'), 2) }&deg;</Badge>
+            </ListGroupItem>
+            { temp.error ? <ListGroupItem className={s.error}>{`Error: ${temp.error.message}`}</ListGroupItem> : '' }
+            <ListGroupItem>
+              <ProgressBar max={150} normal={80} percentage={ mathjs.round(temp.get('temp'), 2) } symbol={`&deg;`} />
+            </ListGroupItem>
+          </ListGroup>
           <ListGroup>
             <ListGroupItem className={s.label}>
               <i className="fa fa-database" aria-hidden="true" />

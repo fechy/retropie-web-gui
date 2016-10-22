@@ -7,18 +7,18 @@ import io from 'socket.io-client';
 import * as actions from '../actions/stats';
 
 const mapStateToProps = (state) => {
-  return {
-
-  }
+  return { }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    update: data => dispatch(actions.update(data))
+    update: data => dispatch(actions.update(data)),
+    updateTemp: data => dispatch(actions.updateTemp(data)),
   }
 };
 
 const statEvent = 'system_health';
+const tempEvent = 'temperatureUpdate';
 
 class SystemHealth extends Component
 {
@@ -27,19 +27,14 @@ class SystemHealth extends Component
   componentDidMount() {
     const { port, ip } = this.props;
     this.socket = io(`http://${ip}:${port}`);
-    this.socket.on('init', () => {
-      console.log('init!');
-    });
 
-    this.socket.on(statEvent, ::this._receiveData);
+    this.socket.on(statEvent, ::this.props.update);
+    this.socket.on(tempEvent, ::this.props.updateTemp);
   }
 
   componentWillUnmount() {
     this.socket.removeAllListeners(statEvent);
-  }
-
-  _receiveData(time, data) {
-    this.props.update(data);
+    this.socket.removeAllListeners(tempEvent);
   }
 
   render() {

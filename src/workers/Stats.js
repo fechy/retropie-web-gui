@@ -16,8 +16,7 @@ function calculate(socket) {
     const mem = memory();
 
     measureCPUUsage().then(cpu => {
-      const date = new Date().getTime();
-      socket.emit('system_health', date, { disk, cpu, memory: mem });
+      socket.emit('system_health', { disk, cpu, memory: mem });
     });
   });
 }

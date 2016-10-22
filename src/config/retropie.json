@@ -1,3 +1,4 @@
 {
-  "path": "/home/pi/RetroPie"
+  "path": "/home/pi/RetroPie",
+  "temp_cmd": "cat /sys/class/thermal/thermal_zone0/temp"
 }

@@ -6,9 +6,14 @@
 
 .stat {
   padding:0 10px;
+  transition: all .5s ease-out;
 }
 
 .stat i {
   width:15px;
   margin-right: 5px;
+}
+
+.high {
+  color:#FF0000;
 }
