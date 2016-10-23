@@ -6,7 +6,7 @@ INIT_SCRIPT="retropie-web-gui.sh"
 # Checks if we are running this script with the right user
 function is_right_user {
   USR="$(whoami)";
-  if [ "$USR" -eq 'root' ];
+  if [ "$USR" = 'root' ];
   then
     echo "Please don't run this command as root";
     exit 0;
@@ -169,12 +169,12 @@ function stop_running_servers {
 # Run all tasks
 function run {
   is_right_user;
-  stop_running_servers;
-  run_prepare_env;
-  run_get_release;
-  run_prepare_server;
-  run_start_server;
-  set_init_script
+  #stop_running_servers;
+  #run_prepare_env;
+  #run_get_release;
+  #run_prepare_server;
+  #run_start_server;
+  #set_init_script
 }
 
 run;
